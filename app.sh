@@ -30,7 +30,7 @@ while read -r line; do
 
         case "$KEY" in
           KEY_ENTER)
-            playSound soundfiles/gun-echo-sound.mp3
+            playSound soundfiles/ai-l96a1.mp3
           ;;
           KEY_SPACE)
             playSound soundfiles/gun-reload-sound.mp3
@@ -39,8 +39,11 @@ while read -r line; do
             echo -e "\033[0m"
             exit 0
           ;;
+          KEY_[0-9] | KEY_KP[0-9])
+            playSound soundfiles/barrett-m82-a1.mp3
+          ;;
           *)
-            playSound soundfiles/gun-sound.mp3
+            playSound soundfiles/ak-47.mp3
           ;;
         esac
     fi
