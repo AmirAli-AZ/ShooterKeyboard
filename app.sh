@@ -10,6 +10,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+bash welcome.sh
+
 read -r -p "Enter your device input(check \"sudo evtest\" to see list of devices): " DEVICE
 USER_NAME=$(logname)
 USER_UID=$(id -u "$USER_NAME")
@@ -26,7 +28,6 @@ while read -r line; do
     if echo "$line" | grep -q "Event: time.*type 1 (EV_KEY).*value 1"; then
         KEY=$(echo "$line" | grep -oP "code \d+ \(\K[^)]+")
 
-        echo "Key Pressed: $KEY"
         case "$KEY" in
           KEY_ENTER)
             playSound soundfiles/gun-echo-sound.mp3
@@ -35,6 +36,7 @@ while read -r line; do
             playSound soundfiles/gun-reload-sound.mp3
           ;;
           KEY_ESC)
+            echo -e "\033[0m"
             exit 0
           ;;
           *)
