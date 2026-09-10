@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo -e "\033[1m"
-echo -e "\033[36m"
+tput bold
+tput setaf 36
 echo "                                     WELCOME TO SHOOTER KEYBOARD"
 echo ""
 echo ""

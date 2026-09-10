@@ -12,9 +12,14 @@ fi
 
 bash welcome.sh
 
+trap "tput sgr0; tput cnorm; stty echo < /dev/tty" EXIT INT TERM
+
 read -r -p "Enter your device input(check \"sudo evtest\" to see list of devices): " DEVICE
 USER_NAME=$(logname)
 USER_UID=$(id -u "$USER_NAME")
+
+tput civis
+stty -echo
 
 playSound() {
   sudo -u "$USER_NAME" env \
@@ -36,7 +41,6 @@ while read -r line; do
             playSound soundfiles/gun-reload-sound.mp3
           ;;
           KEY_ESC)
-            echo -e "\033[0m"
             exit 0
           ;;
           KEY_[0-9] | KEY_KP[0-9])
